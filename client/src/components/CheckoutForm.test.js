@@ -6,11 +6,15 @@ import CheckoutForm from "./CheckoutForm";
 
 test("form header renders", () => {
 
-    const { getByText } = render(<CheckoutForm />)
-    const formHeaderRender = screen.getByText(/checkout form/i)
-
+    const { getByText } = render(<CheckoutForm />);
+    const formHeaderRender = screen.getByText(/checkout form/i);
 });
 
 test("form shows success message on submit with form details", () => {
+    const { getByTestId } = render(<CheckoutForm />);
+    const submitButtonMessage = getByTestId("checkout-button");
 
+    fireEvent.click(submitButtonMessage);
+    const successMessage = getByTestId("successMessage");
+    expect(successMessage).toBeInTheDocument();
 });
